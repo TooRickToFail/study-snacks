@@ -159,22 +159,27 @@ body {
 .book-status.available {
   background: var(--available-back);
   color: var(--available-font);
+  content: "Available";
 }
 .book-status.unavailable {
   background: var(--unavailable-back);
   color: var(--unavailable-font);
+  content: "Unable to Find";
 }
 .book-status.alternate {
   background: var(--alternate-back);
   color: var(--alternate-font);
+  content: "Alternate Available";
 }
 .book-status.queued {
   background: var(--queued-back);
   color: var(--queued-font);
+  content: "Waiting to Search";
 }
 .book-status.verify {
   background: var(--verify-back);
   color: var(--verify-font);
+  content: "Verifying"
 }
 
 /* --------------------------------------- Book spread container */
