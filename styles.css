@@ -1,0 +1,404 @@
+:root {
+  --unavailable-back: #F59D94;
+  --unavailable-font: #901C14;
+  --available-back: #A8D9B6;
+  --available-font: #165F3B;
+  --alternate-back: #FFDA8A;
+  --alternate-font: #b25e00;
+  --verify-back: #9BC2ED;
+  --verify-font: #17468C;
+  --queued-back: #FFBD8A;
+  --queued-font: #9D3E07;
+  
+  --title-font: #000000;		/* black */
+  --main-font: #222222;			/* almost black */
+  --sub-font: #666666;			/* dark gray */
+  --borders: #cccccc;		/* medium gray */
+  
+  --page-background: #777777;
+  --family-background: #eae7f4;
+  --release-header-background: #cccccc;
+  --sub-background: #fafafa;
+  --main-background: #ffffff;
+  --button-background: #A8D9B6;
+  --release-content-background: #eeeeee;\
+  
+  --nothing: blue;
+  
+  
+}
+.html {
+  font-size: 16px;
+}
+/* --------------------------------------- Page baseline */
+body {
+  margin: 0;
+  padding: 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--page-background);
+}
+
+.page {
+  //max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: var(--page-background);
+}
+
+
+/* --------------------------------------- Family container */
+.family {
+  margin-bottom: 0.75rem;
+}
+
+/* Clickable row */
+.family-header {
+  width: 100%;
+  background: var(--family-background);
+  border: none;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* invisible two-column split */
+  gap: 2rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+/* Title */
+.family-title {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main title */
+.family-title-main {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--title-font);
+}
+
+/* Sub title */
+.family-title-sub {
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--sub-font);
+}
+.family-title-sub:empty {
+  display: none;
+}
+
+/* Authors */
+.family-authors {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--sub-font);
+}
+.family-content {
+  background: var(--main-background);
+  //padding: 0.75rem 1rem;
+  display: none;
+  //border-top: 1px solid var(--borders);
+  margin: 0 1.5rem;
+  //margin-left: 1.5rem;   /* visual hierarchy */
+  //margin-right: 1.5rem;
+}
+
+/* --------------------------------------- Release row */
+.release{
+
+}
+.release-header {
+  //border-top: 1px solid var(--nothing);
+  padding: 0.2rem 0.6rem;     /* top&bottom / sides *//* vertically tighter */
+  //margin-bottom: 0.4rem;
+  font-size: 0.95rem;         /* same as author size */
+  font-style: italic;
+  font-weight: 700;           /* bold */
+  color: var(--title-font);
+  background: var(--release-header-background);        /* subtle banner feel */
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+.release-content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding: 8px;
+  background-color: var(--release-content-background);
+}
+
+/* --------------------------------------- Outer profile wrapper */
+.book-profile {
+  width: 100%;
+  max-width: 500px; /* match your book-spread max-width */
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid; //looks good to have this for now at least
+  overflow: hidden;
+}
+
+/* Top status banner (mantle) */
+.book-status {
+  height: 24px; /* roughly label-height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.book-status.available {
+  background: var(--available-back);
+  color: var(--available-font);
+}
+.book-status.unavailable {
+  background: var(--unavailable-back);
+  color: var(--unavailable-font);
+}
+.book-status.alternate {
+  background: var(--alternate-back);
+  color: var(--alternate-font);
+}
+.book-status.queued {
+  background: var(--queued-back);
+  color: var(--queued-font);
+}
+.book-status.verify {
+  background: var(--verify-back);
+  color: var(--verify-font);
+}
+
+/* --------------------------------------- Book spread container */
+.book-spread {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  //max-width: 1000px;
+  margin: 0 auto;
+  background: var(--main-background);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Left page */
+.book-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sub-background);
+  position: relative;
+  cursor: pointer;
+  //border: 1px solid red;
+}
+
+.book-cover img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+/* overlay label */
+.zoom-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+
+  pointer-events: none;
+}
+
+.book-cover:hover .zoom-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+.zoom-hint::after {
+ content: "Click to zoom";
+}
+
+/* Right page */
+.book-info {
+  padding: 8px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  //border: 1px solid red;
+}
+
+/* Individual info boxes */
+.info-box {
+  border: 2px solid var(--borders);
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: relative;
+  background: var(--sub-background);
+}
+
+/* Small label */
+.label {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  padding: 0 6px;
+  background: var(--sub-background);
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--sub-font);
+}
+
+/* Main value text */
+.value {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--main-font);
+  line-height: 1.2;
+}
+
+
+
+/* --------------------------------------- Bottom shelves container */
+.book-shelves {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 6px;
+  background: var(--main-background);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* Individual shelf row */
+.shelf {
+  //padding: 0px 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--main-background);
+  //border: 1px solid var(--borders);
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 4px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* LEFT: actions */
+.shelf-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+/* Single-button variant */
+.shelf-actions.single {
+  grid-template-columns: 1fr;
+}
+
+.shelf-btn {
+  padding: 4px 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--main-font);
+  border: 1px solid var(--borders);
+  background: var(--button-background);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* RIGHT: metadata */
+.shelf-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+/* Mini info boxes */
+.meta-box {
+  position: relative;
+  padding: 4px 4px;
+  border: 1px solid var(--borders);
+  background: var(--sub-background);
+  border-radius: 4px;
+}
+
+.meta-label {
+  position: absolute;
+  top: -7px;
+  left: 6px;
+  padding: 0 4px;
+  font-size: 0.65rem;
+  font-style: italic;
+  color: var(--sub-font);
+  background: var(--sub-background);
+}
+
+.meta-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--main-font);
+}
+
+@media (hover: none) {
+  .zoom-hint::after {
+    content: "Tap to zoom";
+  }
+  .zoom-hint {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (max-width: 900px) {
+  .html {
+    font-size: 10px;
+  }
+  .page {
+    padding: 0.5rem;
+  }
+  .release-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .family-header {
+    grid-template-columns: 1fr; /* single column */
+    gap: 0.25rem; /* optional, smaller spacing between rows */
+    padding: 0.75rem;
+  }
+
+  .family-authors {
+    grid-column: 1; /* forces authors into first column */
+    margin-top: 0.25rem; /* optional spacing from subtitle */
+    padding: 0.25rem;
+    border-top: 1.5px solid var(--borders);
+  }
+  .family-content {
+    margin: 0 1rem;
+  }
+}
+/* Phone */
+@media (max-width: 600px) {
+  .html {
+    font-size: 10px;
+  }
+  .page {
+    padding: 0.25rem;
+  }
+  .family-content {
+    margin: 0 0.75rem;
+  }
+  .release-content {
+    grid-template-columns: 1fr; /* single column, full width */
+  }
+}
