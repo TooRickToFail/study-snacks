@@ -233,7 +233,7 @@ body {
   transform: translateY(0);
 }
 .zoom-hint::after {
- content: "Click to zoom";
+  content: "Click to zoom";
 }
 
 /* Right page */
