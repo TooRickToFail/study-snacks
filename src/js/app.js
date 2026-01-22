@@ -22,6 +22,7 @@ async function loadSnacks() {
 
 async function init() {
 	await loadSnacks();
+	setupImageModal();
 	setupFamilyAccordion();
 	setupDownloadButtons();
 };
