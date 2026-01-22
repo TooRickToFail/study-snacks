@@ -171,7 +171,7 @@ body {
   color: var(--alternate-font);
   content: "Alternate Available";
 }
-.book-status.queued {
+.book-status.queue {
   background: var(--queued-back);
   color: var(--queued-font);
   content: "Waiting to Search";
@@ -233,7 +233,7 @@ body {
   transform: translateY(0);
 }
 .zoom-hint::after {
-  content: "Click to zoom";
+ content: "Click to zoom";
 }
 
 /* Right page */
@@ -355,6 +355,27 @@ body {
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--main-font);
+}
+
+.modal {
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 20px; /* Location of the box */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+}
+.modal.hidden {
+	display: none; /* Hidden by default */
+}
+.modal-content {
+	margin: auto;
+	display: block;
+	height: 95%;
 }
 
 @media (hover: none) {
