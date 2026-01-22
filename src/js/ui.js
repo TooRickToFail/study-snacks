@@ -14,7 +14,7 @@ export function setupDownloadButtons() {
 	document.querySelectorAll(".download-btn").forEach(btn => {
 		btn.addEventListener("click", handleDownloadClick);
 	});
-}
+};
 
 export function renderAllFamilies(families) {
 	document.getElementById('snack-list').innerHTML = families.map(renderFamily).join('');
@@ -172,9 +172,9 @@ async function handleDownloadClick(event) {
 	
 	try {
 		const url = await getDownloadUrl(fileKey);
-		window.location.href = url; // triggers download
+		window.open(url, "_blank");
 	} catch (err) {
 		console.error(err);
 		alert("Unable to download the file at this time.");
 	}
-}
+};

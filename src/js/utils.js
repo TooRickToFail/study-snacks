@@ -108,5 +108,5 @@ function buildAuthorList(authors) {
 function ensureArray(snack) {
 	if (!snack) return [];
 	return Array.isArray(snack) ? snack : [snack];
-}
+};
 

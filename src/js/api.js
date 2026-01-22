@@ -23,7 +23,7 @@ export async function getDownloadUrl(fileKey) {
 	
 	const { url } = await res.json();
 	return url;
-}
+};
 
 export async function getSnacks() {
 	const { data, error } = await supabaseClient
