@@ -34,9 +34,9 @@ function buildCoverUrl(basePath, coverSlug) {
 			coverSlug;
 };
 
-function buildFileUrl(basePath, fileSlug) {
+function buildFileKey(basePath, fileSlug) {
 	if (!fileSlug) return "";
-	return	`${ASSET_BASE_URL}/` +
+	return	`textbooks/` +
 			`${basePath.family}/` +
 			`${basePath.release}/` +
 			`${basePath.profile}/files/` +
@@ -169,7 +169,7 @@ function mapSnacks(rawSnacks) {
 							download_color_tone: download.lookup_color_tone?.color_tone_label ?? null,
 							download_original_source: download.lookup_original_source?.original_source_label ?? null,
 							
-							download_file_url: buildFileUrl(basePath, download.download_file_slug),
+							download_file_key: buildFileKey(basePath, download.download_file_slug),
 							download_preview_url: buildPreviewUrl(basePath, download.download_preview_slug)
 						}))
 					};
@@ -186,7 +186,7 @@ function renderDownload(snackDownload) {
 	<!-- Left: actions -->
 	<div class="shelf-actions">
 		<button class="shelf-btn preview-btn" data-img="${snackDownload.download_preview_url}">See Page 1</button>
-		<button class="shelf-btn primary">Download ${snackDownload.download_file_type_label}</button>
+		<button class="shelf-btn download-btn primary" data-key="${snackDownload.download_file_key}">Download ${snackDownload.download_file_type_label}</button>
 	</div>
 	<!-- Right: metadata -->
 	<div class="shelf-meta">
@@ -206,7 +206,7 @@ function renderDownload(snackDownload) {
 <div class="shelf">
 	<!-- Left: actions -->
 	<div class="shelf-actions single">
-		<button class="shelf-btn primary">Download ${snackDownload.download_file_type_label}</button>
+		<button class="shelf-btn download-btn primary" data-key="${snackDownload.download_file_key}">Download ${snackDownload.download_file_type_label}</button>
 	</div>
 	<!-- Right: metadata -->
 	<div class="shelf-meta">
@@ -321,6 +321,33 @@ function setupFamilyAccordion() {
 async function init() {
 	await loadSnacks();
 	setupFamilyAccordion();
+	document.querySelectorAll(".download-btn").forEach(btn => {
+		btn.addEventListener("click", handleDownloadClick);
+	});
+};
+
+async function handleDownloadClick(event) {
+	const btn = event.currentTarget;
+	const fileKey = btn.dataset.key;
+	
+	try {
+		const res = await fetch(
+			`https://jrtecgypjegwsypdhjqc.supabase.co/functions/v1/get-download-url?key=${encodeURIComponent(fileKey)}`,
+				{
+					headers: {
+						apikey: "sb_publishable_Xe4ChJf8gpWZbv_T1XKrUA_e3d9gZ-t"
+					}
+				}
+		);
+		
+		if (!res.ok) throw new Error("Failed to get download URL");
+		
+		const { url } = await res.json();
+		window.location.href = url; // triggers the download
+	} catch (err) {
+		console.error(err);
+		alert("Unable to download the file at this time.");
+	}
 };
 
 
