@@ -70,8 +70,8 @@ export async function getSnacks() {
 				)
 			)
 		`)
-		.order('family_title_sort', { ascending: true });
-		//.order('release_slug', { ascending: false });
+		.order('family_title_sort', { ascending: true })
+		.order('release_slug', { foreignTable: 'structure_release', ascending: false });
 		
 		return data;
 };
