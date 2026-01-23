@@ -70,7 +70,8 @@ export async function getSnacks() {
 				)
 			)
 		`)
-		.order('family_title_sort', { ascending: true });
+		.order('family_title_sort', { ascending: true })
+		.order('release_slug', { ascending: false });
 		
 		return data;
 };
