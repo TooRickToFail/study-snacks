@@ -121,7 +121,7 @@ function renderProfile(snackProfile) {
 };
 
 function renderDownload(snackDownload) {
-	if (snackDownload.download_file_type_value = "pdf") {
+	if (snackDownload.download_file_type_value === "pdf") {
 		return `
 <div class="shelf">
 	<!-- Left: actions -->
@@ -142,7 +142,7 @@ function renderDownload(snackDownload) {
 	</div>
 </div>
 		`;
-	} else if (snackDownload.download_file_type_value = "epub") {
+	} else if (snackDownload.download_file_type_value === "epub") {
 		return `
 <div class="shelf">
 	<!-- Left: actions -->
