@@ -26,43 +26,47 @@ export function mapSnacks(rawSnacks) {
 			family_author_list: familyAuthors.map(a => a.author_name).join(", "),
 			
 			releases: ensureArray(family.structure_release).map(release => ({
-				release_id: release.release_id,
-				release_year: release.release_year,
-				release_label: release.lookup_edition?.edition_label ?? null,
-				release_slug: release.lookup_edition?.edition_slug ?? null,
+				const releaseSlug = release.lookup_edition?.edition_slug ?? null;
 				
-				profiles: ensureArray(release.structure_profile).map(profile => {
-					const basePath = {
-						family: family.family_slug,
-						release: release.lookup_edition?.edition_label ?? null,
-						profile: profile.profile_slug,
-					};
+				return {
+					release_id: release.release_id,
+					release_year: release.release_year,
+					release_label: release.lookup_edition?.edition_label ?? null,
+					release_slug: releaseSlug,
 					
-					return {
-						profile_cover_slug: profile.profile_cover_slug,
-						profile_slug: profile.profile_slug,
-						profile_audience: profile.lookup_audience?.audience_label ?? null,
-						profile_content: profile.lookup_content?.content_label ?? null,
-						profile_market: profile.lookup_market?.market_label ?? null,
-						profile_status_label: profile.lookup_status?.status_label ?? null,
-						profile_status_value: profile.lookup_status?.status_value ?? null,
+					profiles: ensureArray(release.structure_profile).map(profile => {
+						const basePath = {
+							family: family.family_slug,
+							release: releaseSlug,
+							profile: profile.profile_slug,
+						};
 						
-						profile_cover_url: buildCoverUrl(basePath, profile.profile_cover_slug),
-						
-						downloads: ensureArray(profile.structure_download).map(download => ({
-							download_file_slug: download.download_file_slug,
-							download_file_name: download.download_file_name,
-							download_preview_slug: download.download_preview_slug,
-							download_file_type_label: download.lookup_file_type?.file_type_label ?? null,
-							download_file_type_value: download.lookup_file_type?.file_type_value ?? null,
-							download_color_tone: download.lookup_color_tone?.color_tone_label ?? null,
-							download_original_source: download.lookup_original_source?.original_source_label ?? null,
+						return {
+							profile_cover_slug: profile.profile_cover_slug,
+							profile_slug: profile.profile_slug,
+							profile_audience: profile.lookup_audience?.audience_label ?? null,
+							profile_content: profile.lookup_content?.content_label ?? null,
+							profile_market: profile.lookup_market?.market_label ?? null,
+							profile_status_label: profile.lookup_status?.status_label ?? null,
+							profile_status_value: profile.lookup_status?.status_value ?? null,
 							
-							download_file_key: buildFileKey(basePath, download.download_file_slug),
-							download_preview_url: buildPreviewUrl(basePath, download.download_preview_slug)
-						}))
-					};
-				})
+							profile_cover_url: buildCoverUrl(basePath, profile.profile_cover_slug),
+							
+							downloads: ensureArray(profile.structure_download).map(download => ({
+								download_file_slug: download.download_file_slug,
+								download_file_name: download.download_file_name,
+								download_preview_slug: download.download_preview_slug,
+								download_file_type_label: download.lookup_file_type?.file_type_label ?? null,
+								download_file_type_value: download.lookup_file_type?.file_type_value ?? null,
+								download_color_tone: download.lookup_color_tone?.color_tone_label ?? null,
+								download_original_source: download.lookup_original_source?.original_source_label ?? null,
+								
+								download_file_key: buildFileKey(basePath, download.download_file_slug),
+								download_preview_url: buildPreviewUrl(basePath, download.download_preview_slug)
+							}))
+						};
+					})
+				};
 			}))
 		};
 	});
