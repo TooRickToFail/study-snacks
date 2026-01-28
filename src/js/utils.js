@@ -25,7 +25,7 @@ export function mapSnacks(rawSnacks) {
 			family_authors: familyAuthors,
 			family_author_list: familyAuthors.map(a => a.author_name).join(", "),
 			
-			releases: ensureArray(family.structure_release).map(release => ({
+			releases: ensureArray(family.structure_release).map(release => {
 				const releaseSlug = release.lookup_edition?.edition_slug ?? null;
 				
 				return {
@@ -67,7 +67,7 @@ export function mapSnacks(rawSnacks) {
 						};
 					})
 				};
-			}))
+			})
 		};
 	});
 };
