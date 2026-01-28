@@ -45,9 +45,9 @@ export async function getSnacks() {
 			
 			structure_release (
 				release_id,
-				release_label,
 				release_year,
-				release_slug,
+				
+				lookup_edition ( edition_label, edition_slug),
 				
 				structure_profile (
 					profile_cover_slug,
@@ -71,7 +71,7 @@ export async function getSnacks() {
 			)
 		`)
 		.order('family_title_sort', { ascending: true })
-		.order('release_slug', { foreignTable: 'structure_release', ascending: false });
+		.order('release_year', { foreignTable: 'structure_release', ascending: false });
 		
 		return data;
 };
