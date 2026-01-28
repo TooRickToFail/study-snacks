@@ -34,7 +34,7 @@ export function mapSnacks(rawSnacks) {
 				profiles: ensureArray(release.structure_profile).map(profile => {
 					const basePath = {
 						family: family.family_slug,
-						release: release.release_slug,
+						release: release.lookup_edition?.edition_label ?? null,
 						profile: profile.profile_slug,
 					};
 					
